@@ -1,0 +1,10 @@
+ <openerp><data>
+
+<template id="optional_products" inherit_id="website_chd_product_configurator.sale_options" name="Add to wishlist">
+  <xpath expr="//button[@id='buy']"  position="after">
+       <button id="buy" type="button" class="btn btn-primary btn-lg pull-right" >Add to wishlist</button>
+  </xpath>
+</template>
+
+</data>
+ </openerp>
