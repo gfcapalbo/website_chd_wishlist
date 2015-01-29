@@ -15,5 +15,6 @@ The user will have the possibility to view his wishlists and transform them in o
            ],
 'data': [
         'templates/templates.xml',
+        'views/chd_wishlist.xml',
         ],
 }

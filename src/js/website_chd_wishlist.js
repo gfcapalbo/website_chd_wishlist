@@ -1,0 +1,3 @@
+
+
+$('[type="button"]').button().each()
