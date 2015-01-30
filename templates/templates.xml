@@ -10,11 +10,11 @@
 
         <template id="optional_products" inherit_id="website_chd_product_configurator.sale_options" name="Add to wishlist">
           <xpath expr="//button[@id='buy']"  position="before">
-          		<button id="addwish" type="submit" class="btn btn-primary btn-lg pull-right" >Add to cart</button>
+          		<button id="addwish" value="wish" name="action" type="submit" class="btn btn-primary btn-lg pull-right" >Add to cart</button>
 		  </xpath>
         </template>
 
-        <template id="header" inherit_id="website.layout" name="Header wishlist">
+        <template id="header" inherit_id="website.layout" name="Header_wishlist">
 			  <xpath expr="//header//ul[@id='top_menu']/li" position="after">
 			      <li >
 			          <a href="/wish/">
@@ -24,7 +24,51 @@
 			  </xpath>
 		</template>
 
+<template id="show_list">
+    <t t-call="website.layout">
+      <t t-set="title">My Wishlist</t>
+      <div class="oe_structure"/>
+      <div class="oe_structure">
+        <div class="container">
+        <h3><t t-esc="user.name" /> 's wishlist  </h3>
 
+        <div class="row mt12">
+             <div class="col-sm-4">
+                      <div class="row mt4 solid">
+                      				<p><b><i>Just Added:</i></b></p>
+                      			   	<div id="feedback" class="col-xs-6"><t t-raw="summary"/></div>
+                       </div>
+             </div>
+
+             <div class="col-sm-8">
+                <t t-foreach="results" t-as="result">
+                   <form t-attf-name="buy#{result_id}" t-attf-action="/chd_init/buy#{result.id}/" method="post" class="form-horizontal result_option">
+                       <input type="hidden" name="result_obj" t-att-value="result" />
+                       <div  class="row" style="border-bottom: 0.5px solid;" id="sale_option">
+                       <br/>
+                            <div class="col-xs-4">
+                                <p>Cost price for supplier : <t t-esc="result.standard_price"/> </p>
+                                <p>Customer price : <t t-esc="result.customer_price"/> </p>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>Total order amount ex. VAT : <t t-esc="result.total_amount_ex_vat"/> </p>
+                                <br/>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>Expected date of delivery: <t t-esc="result.date_delivery"/> </p>
+                                <br/>
+                            </div>
+                        <button id="buy" value="buy" name="action" type="submit" class="btn btn-primary btn-lg pull-right" >Buy</button>
+                        </div>
+                    </form>
+                </t>
+         	</div>
+        </div>
+      </div>
+      </div>
+      <div class="oe_structure"/>
+      </t>
+  </template>
 
     </data>
 </openerp>
