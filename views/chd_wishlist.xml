@@ -9,7 +9,7 @@
                 <form string="Wishlist">
                     <sheet>
                     <group>
-                     <field name="wishlist_id" widget="one2many">
+                     <field name="chd_results" widget="one2many">
 						 <tree string="Wishlist" editable="top" create="false" delete="false">
 						 	 <field name="create_date" />
 						 	 <field name="create_uid" />
@@ -23,6 +23,7 @@
 						 </tree>
 				 	</field>
 						<field name="favorites"/>
+						<field name="owner"/>
                    </group>
                     </sheet>
                 </form>
@@ -34,7 +35,7 @@
             <field name="model">chd.wishlist</field>
             <field name="arch" type="xml">
                 <tree string="wishlists">
-                      <field name="wishlist_id"/>
+                      <field name="chd_results"/>
                     <field name="favorites"/>
                 </tree>
             </field>

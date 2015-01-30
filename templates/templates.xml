@@ -1,13 +1,30 @@
 <openerp>
     <data>
+    	  <template id="assets_chd_wishlist" inherit_id="website.assets_frontend" name="chd_wishlist">
+			  <xpath expr="." position="inside">
+			      <script type="text/javascript" src="/website_chd_wishlist/static/src/js/website_chd_wishlist.js"></script>
+			  </xpath>
+  		</template>
+
+
+
         <template id="optional_products" inherit_id="website_chd_product_configurator.sale_options" name="Add to wishlist">
-          <xpath expr="//button[@id='buy']"  position="after">
-				<a t-attf-href="/chd_init/wishadd/#{result.id}/" data-role="button" data-mini="true" class="btn btn-primary btn-lg pull-right" >Add to my cart</a>
+          <xpath expr="//button[@id='buy']"  position="before">
+          		<button id="addwish" type="submit" class="btn btn-primary btn-lg pull-right" >Add to cart</button>
 		  </xpath>
         </template>
+
+        <template id="header" inherit_id="website.layout" name="Header wishlist">
+			  <xpath expr="//header//ul[@id='top_menu']/li" position="after">
+			      <li >
+			          <a href="/wish/">
+			              My saved wishlist
+			          </a>
+			      </li>
+			  </xpath>
+		</template>
+
+
+
     </data>
-
-
-
-
 </openerp>

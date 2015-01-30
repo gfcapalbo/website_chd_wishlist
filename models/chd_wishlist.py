@@ -25,7 +25,8 @@ from openerp.osv import orm,fields
 class ChdWishlist(orm.Model):
     _name = 'chd.wishlist'
     _columns = {
-        'wishlist_id': fields.one2many('chd.product_configurator.result','id',string='configurator results'),
+        'owner': fields.many2one('res.partner'),
+        'chd_results': fields.one2many('chd.product_configurator.result','id',string='configurator results'),
         'summary': fields.char(string='summary'),
         'favorites':fields.boolean(string='favorites'),
     }

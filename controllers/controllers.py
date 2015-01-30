@@ -6,33 +6,33 @@ from datetime import  datetime
 from openerp.osv import fields,orm
 import json
 
-
-
 class Chd_init(http.Controller):
-
-
     # display current users wishlist
     @http.route('/chd_init/<id>/wishlist/' ,website=True)
     def wish(self,id):
         return True
 
 
-
-
-    @http.route('/chd_init/wishadd/<id>/',website=True)
+    @http.route('/chd_init/wishadd/' ,type='json',website=True)
     def wishadd(self,**form_data):
+        # check if the user already has a wishlist
+        wishlist_model = http.request.env['chd.wishlist']
+        result_model = http.request.env['chd.product_configurator.result']
+        wish_ids = wishlist_model.search([('owner','=',1)])
+        if len(wish_ids) == 0:
+            wish_ids = wishlist_model.create({'owner':1,'favorites': False})
+        # better to write wish_ids.ids[0] ala 8.0 instead of writing wish_ids[0].ids
+        wish_ids.write({
+                    'chd_results':[(1,0,{'chd_results': toadd_id })]
+                     })
 
-        http.request.env['chd.wishlist'].create({'wishlist_id': (0,0,[int(form_data['id'])]),'favorites': False})
+        data = json.dumps(http.request.registry['chd.wishlist'].search_read(
+        http.request.cr,
+        http.request.uid,
+        fields=['id','chd_results'],
+        limit=30,
+        domain=[('owner','in',[int(1)])],
+        context=http.request.context
+        ))
+        return data
 
-
-
-        """result = http.request.env['chd.product_configurator.result'].search([('id','=',form_data['id'])])
-        configurator = http.request.env['chd.product_configurator'].search([('id','=',result.configurator_id.id)])
-        http.request.context['active_id'] = result.id
-        fields = ['order_id','return_to_order','display_order_id','result_id']
-        doorder_model = http.request.env['chd.product_configurator.do_order']
-        # again, access 7.0 with ._model property
-        doorder_model._model.default_get(http.request.cr,http.request.uid,fields_list=fields,context=http.request.context)
-        return http.request.render('website_chd_product_configurator.buy_option',{
-               'summary':form_data['summary'],
-                })"""
