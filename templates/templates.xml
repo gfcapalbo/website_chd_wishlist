@@ -59,7 +59,7 @@
                                 <p>Total order amount ex. VAT : <b><t t-esc="result.total_amount_ex_vat"/></b> </p>
                                 <br/>
                             </div>
-                            <div t-if="result.summary" class="col-xs-4">
+                            <div t-if="result.summary" id="feedback" class="col-xs-4 favorites_option">
                                 <p style="font-size:7px;"> <t t-raw="result.summary"/> </p>
                                 <br/>
                             </div>
