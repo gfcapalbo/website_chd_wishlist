@@ -15,13 +15,16 @@
         </template>
 
         <template id="header" inherit_id="website.layout" name="Header_wishlist">
-			  <xpath expr="//header//ul[@id='top_menu']/li" position="after">
+
+        	<xpath expr="//header//ul[@id='top_menu']/li" position="after">
 			      <li >
-			          <a href="/wish/">
+			          <a href="/chd_init/wishlist/">
 			              My saved wishlist
 			          </a>
 			      </li>
 			  </xpath>
+
+
 		</template>
 
 <template id="show_list">
@@ -34,7 +37,7 @@
 
         <div class="row mt12">
              <div class="col-sm-4">
-                      <div class="row mt4 solid">
+                      <div t-if="summary" class="row mt4 solid">
                       				<p><b><i>Just Added:</i></b></p>
                       			   	<div id="feedback" class="col-xs-6"><t t-raw="summary"/></div>
                        </div>
@@ -42,22 +45,30 @@
 
              <div class="col-sm-8">
                 <t t-foreach="results" t-as="result">
-                   <form t-attf-name="buy#{result_id}" t-attf-action="/chd_init/buy#{result.id}/" method="post" class="form-horizontal result_option">
-                       <input type="hidden" name="result_obj" t-att-value="result" />
+                   <form t-attf-name="buy#{result_id}" t-attf-action="/chd_init/buy#{result.chd_results.id}/" method="post" class="form-horizontal result_option">
+                             <input type="hidden" name="result_obj" t-att-value="result.chd_results" />
                        <div  class="row" style="border-bottom: 0.5px solid;" id="sale_option">
                        <br/>
                             <div class="col-xs-4">
-                                <p>Cost price for supplier : <t t-esc="result.standard_price"/> </p>
-                                <p>Customer price : <t t-esc="result.customer_price"/> </p>
+                            	<p>Product name: <t t-esc="result.chd_results.configurator_id.origin_product_id.name"/> </p>
+                            	<p>Quantity: <t t-esc="result.chd_results.configurator_id.quantity"/> </p>
+                            	<p>Configuration date: <t t-esc="result.chd_results.configurator_id.create_date"/> </p>
+                            	<p>Created by <t t-esc="result.chd_results.configurator_id.partner_id.name"/></p>
                             </div>
                             <div class="col-xs-4">
-                                <p>Total order amount ex. VAT : <t t-esc="result.total_amount_ex_vat"/> </p>
+
+                                <p>list price:<b> <t t-esc="result.chd_results.list_price"/> </b> </p>
+                                <p>Cost price for supplier : <b><t t-esc="result.chd_results.standard_price"/></b> </p>
+                                <p>Customer price : <b><t t-esc="result.chd_results.customer_price"/></b> </p>
+                                <p>Total order amount ex. VAT : <b><t t-esc="result.chd_results.total_amount_ex_vat"/></b> </p>
                                 <br/>
                             </div>
-                            <div class="col-xs-4">
-                                <p>Expected date of delivery: <t t-esc="result.date_delivery"/> </p>
+                            <div t-if="result.summary" class="col-xs-4">
+                                <p style="font-size:7px;"> <t t-raw="result.summary"/> </p>
+
                                 <br/>
                             </div>
+
                         <button id="buy" value="buy" name="action" type="submit" class="btn btn-primary btn-lg pull-right" >Buy</button>
                         </div>
                     </form>
@@ -69,6 +80,21 @@
       <div class="oe_structure"/>
       </t>
   </template>
+
+  <template id="no_list">
+    <t t-call="website.layout">
+      <t t-set="title">No Cart availiable</t>
+      <div class="oe_structure"/>
+      <div class="oe_structure">
+        <div class="container">
+        <h3><t t-esc="user.name" /> , you have not added products to your Cart </h3>
+      </div>
+      </div>
+      <div class="oe_structure"/>
+      </t>
+  </template>
+
+
 
     </data>
 </openerp>
