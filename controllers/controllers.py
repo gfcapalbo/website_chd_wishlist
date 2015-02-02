@@ -16,10 +16,6 @@ class wish_init(http.Controller):
                         })
          wishlist_model = http.request.env['chd.wishlist']
          result_model = http.request.env['chd.product_configurator.result']
-         partner = self.get_current_partner()
-         if not partner:
-             return  http.request.render('website_chd_product_configurator.no_partner',{
-                        })
          wishlist = wishlist_model.search([('owner','=',partner.id)])
          try:
              results = result_model.search([('wishlist','=',wishlist.ids[0])])
@@ -38,5 +34,5 @@ class wish_init(http.Controller):
          if len(current_partner) == 0:
              return False
          else:
-             return current_partner.ids[0]
+             return current_partner[0]
 
