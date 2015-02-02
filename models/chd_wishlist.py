@@ -24,17 +24,16 @@ from openerp.osv import orm,fields
 class ChdWishlist(orm.Model):
     _name = 'chd.wishlist'
     _columns = {
-        'owner': fields.many2one('res.partner'),
-        'element': fields.one2many('chd.wishlist.element','id',string='elements'),
+        'owner': fields.many2one('res.partner',string="owner"),
+        'element': fields.one2many('chd.product_configurator.result','wishlist',string='elements'),
     }
 
 
 
-class ChdWishlistElement(orm.Model):
-    _name = 'chd.wishlist.element'
+class chd_product_configurator_result(orm.Model):
+    _inherit = 'chd.product_configurator.result'
     _columns = {
-        'chd_results': fields.one2many('chd.product_configurator.result','id',string='configurator results'),
-        'wishlist':fields.many2one('chd.wishlist'),
+        'wishlist':fields.many2one('chd.wishlist' ,string="Parent wishlist"),
         'summary': fields.char(string='summary'),
         'favorites':fields.boolean(string='favorites'),
     }

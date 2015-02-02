@@ -11,10 +11,10 @@ class wish_init(http.Controller):
     @http.route('/chd_init/wishlist/' ,website=True)
     def wish(self):
          wishlist_model = http.request.env['chd.wishlist']
-         wishlist_element_model = http.request.env['chd.wishlist.element']
+         result_model = http.request.env['chd.product_configurator.result']
          partner = self.get_current_partner()
          wishlist = wishlist_model.search([('owner','=',partner.id)])
-         results = wishlist_element_model.search([('wishlist','=',wishlist.ids[0])])
+         results = result_model.search([('wishlist','=',wishlist.ids[0])])
 
          if results:
              return  http.request.render('website_chd_wishlist.show_list',{
