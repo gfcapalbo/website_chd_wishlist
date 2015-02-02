@@ -36,7 +36,7 @@
              <div class="col-sm-4">
                       <div t-if="summary" class="row mt4 solid">
                       				<p><b><i>Just Added:</i></b></p>
-                      			   	<div id="feedback" class="col-xs-6"><t t-raw="summary"/></div>
+                      			   	<div id="justadded" class="col-xs-6"><t t-raw="summary"/></div>
                        </div>
              </div>
 

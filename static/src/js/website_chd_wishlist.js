@@ -4,10 +4,13 @@ $(document).ready(function () {
 	$('.favorites_option').submit( function(){
 		chosenform=this;
 			var elements = document.querySelectorAll( 'feedback *' );
+			var accessories
 			$('<input />').attr('type', 'hidden')
          .attr('name', "summary")
          .attr('value', document.getElementById("feedback").innerHTML)
          .appendTo(chosenform);
+
+
          return true;
     });
 

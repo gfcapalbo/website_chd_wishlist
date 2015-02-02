@@ -28,8 +28,6 @@ class ChdWishlist(orm.Model):
         'element': fields.one2many('chd.product_configurator.result','wishlist',string='elements'),
     }
 
-
-
 class chd_product_configurator_result(orm.Model):
     _inherit = 'chd.product_configurator.result'
     _columns = {
