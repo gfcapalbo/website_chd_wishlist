@@ -9,8 +9,6 @@ $(document).ready(function () {
          .attr('name', "summary")
          .attr('value', document.getElementById("feedback").innerHTML)
          .appendTo(chosenform);
-
-
          return true;
     });
 
