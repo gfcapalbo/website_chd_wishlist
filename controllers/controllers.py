@@ -38,10 +38,10 @@ class Chd_website_ext(pc.Chd_website):
         result_model = http.request.env['chd.product_configurator.result']
         result = result_model.search([('id', '=', form_data['id'])])
         http.request.context['active_id'] = result.id
+        wishlist_model = http.request.env['chd.wishlist']
+        # check if the user already has a wishlist if not create
+        wishlist = wishlist_model.search([('owner', '=', partner.id)])
         if form_data['action'] == 'wish':
-            wishlist_model = http.request.env['chd.wishlist']
-            # check if the user already has a wishlist if not create
-            wishlist = wishlist_model.search([('owner', '=', partner.id)])
             if len(wishlist) == 0:
                 wishlist = wishlist_model.create({'owner': partner.id})
             # better to write wishlist.ids[0] ala 8.0 instead of wishlist[0].id
@@ -52,17 +52,20 @@ class Chd_website_ext(pc.Chd_website):
                 })
             results = result_model.search([('wishlist', '=', wishlist.ids[0])])
             return http.request.render('website_chd_wishlist.show_list', {
-                'summary': form_data['summary'],
+                'summary': result.summary,
                 'user': result.create_uid,
                 'results': results,
                 })
         elif form_data['action'] == 'erase':
-
+            #do not want to erase the configurator result.
+            #wishlist[0].write({'element':[(2,result.ids[0],0)]})
+            #will make all "erased" results point to wishlist 0.
             result.write({
-                'wishlist': wishlist.ids[0],
+                'wishlist': 0,
                 'summary': form_data['summary'],
                 'favorites': False,
                 })
+            results = result_model.search([('wishlist', '=', wishlist.ids[0])])
             return http.request.render('website_chd_wishlist.show_list', {
                 'summary': form_data['summary'],
                 'user': result.create_uid,
