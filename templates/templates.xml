@@ -10,7 +10,7 @@
 
         <template id="optional_products" inherit_id="website_chd_product_configurator.sale_options" name="Add to wishlist">
           <xpath expr="//button[@id='buy']"  position="before">
-          		<button id="addwish" value="wish" name="action" type="submit" class="btn btn-primary btn-lg pull-left" >Add to cart</button>
+          		<button id="addwish" value="wish" name="action" type="submit" class="btn btn-primary btn-lg pull-left" >Add to basket</button>
 		  </xpath>
         </template>
 
