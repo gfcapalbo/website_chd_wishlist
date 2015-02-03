@@ -62,8 +62,6 @@ class Chd_website_ext(pc.Chd_website):
             #will make all "erased" results point to wishlist 0.
             result.write({
                 'wishlist': 0,
-                'summary': form_data['summary'],
-                'favorites': False,
                 })
             results = result_model.search([('wishlist', '=', wishlist.ids[0])])
             return http.request.render('website_chd_wishlist.show_list', {

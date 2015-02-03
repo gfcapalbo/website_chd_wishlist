@@ -64,12 +64,12 @@
                                 <br/>
                             </div>
                         <button id="buy" value="buy" name="action" type="submit" class="btn btn-primary btn-lg pull-right" >Buy</button>
-                        <button id="erase" value="erase" name="action" type="submit" class="btn btn-primary btn-lg pull-left" >Delete</button>
+                        <button id="erase" value="erase" name="action" type="submit" class="btn btn-primary btn-lg pull-right erase" >Delete</button>
                         </div>
                     </form>
                 </t>
          	</div>
-        </div>
+		<button id="back" value="back" name="action" type="button" class="btn btn-primary btn-lg pull-left back" > &lt; Back</button>        </div>
       </div>
       </div>
       <div class="oe_structure"/>
@@ -83,7 +83,7 @@
       <div class="oe_structure">
         <div class="container">
         <h3><t t-esc="user.name" /> , you have not added products to your saved offers </h3>
-      </div>
+			<button id="back" value="back" name="action" type="button" class="btn btn-primary btn-lg pull-left back" > &lt; Back</button>      </div>
       </div>
       <div class="oe_structure"/>
       </t>

@@ -29,5 +29,13 @@ $(document).ready(function () {
         });
     });
 
+	$(".back").click(function () {
+		window.history.back().refresh();
+
+	});
+
+	$(".erase").on("click", null, function(){
+        return confirm("Are you sure you want to permanently delete this element?");
+	});
 
 });
