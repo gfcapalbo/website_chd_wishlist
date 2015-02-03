@@ -10,7 +10,7 @@
 
         <template id="optional_products" inherit_id="website_chd_product_configurator.sale_options" name="Add to wishlist">
           <xpath expr="//button[@id='buy']"  position="before">
-          		<button id="addwish" value="wish" name="action" type="submit" class="btn btn-primary btn-lg pull-left" >Add to basket</button>
+          		<button id="addwish" value="wish" name="action" type="submit" class="btn btn-primary btn-lg pull-left" >Add to saved offers</button>
 		  </xpath>
         </template>
 
@@ -18,7 +18,7 @@
         	<xpath expr="//header//ul[@id='top_menu']/li" position="after">
 			      <li >
 			          <a href="/chd_init/wishlist/">
-			              My saved basket
+			              My saved offers
 			          </a>
 			      </li>
 			  </xpath>
@@ -26,16 +26,16 @@
 
 <template id="show_list">
     <t t-call="website.layout">
-      <t t-set="title">My basket</t>
+      <t t-set="title">My offers</t>
       <div class="oe_structure"/>
       <div class="oe_structure">
         <div class="container">
-        <h3><t t-esc="user.name" /> 's saved basket  </h3>
-		<p><i>Your basket contains all configured products that have been saved and can be purchased in any moment.</i></p>
+        <h3><t t-esc="user.name" /> 's saved offers  </h3>
+		<p><i>Your saved offers area contains all configured products that have been saved and can be purchased in any moment.</i></p>
         <div class="row mt12">
              <div class="col-sm-12">
                       <div t-if="summary" class="row mt4 solid">
-                      				<p><b><i>Just Added to your basket:</i></b></p>
+                      				<p><b><i>Just Added to your saved offers area:</i></b></p>
                       			   	<div id="justadded" class="col-xs-12"><t t-raw="summary"/></div>
                        </div>
              </div>
@@ -78,11 +78,11 @@
 
   <template id="no_list">
     <t t-call="website.layout">
-      <t t-set="title">No Basket availiable</t>
+      <t t-set="title">No saved offers availiable</t>
       <div class="oe_structure"/>
       <div class="oe_structure">
         <div class="container">
-        <h3><t t-esc="user.name" /> , you have not added products to your basket </h3>
+        <h3><t t-esc="user.name" /> , you have not added products to your saved offers </h3>
       </div>
       </div>
       <div class="oe_structure"/>

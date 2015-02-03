@@ -57,6 +57,7 @@ class Chd_website_ext(pc.Chd_website):
                 'results': results,
                 })
         elif form_data['action'] == 'erase':
+
             result.write({
                 'wishlist': wishlist.ids[0],
                 'summary': form_data['summary'],
