@@ -19,25 +19,24 @@
 #
 ##############################################################################
 
-from openerp.osv import orm,fields
+from openerp.osv import orm, fields
+
 
 class ChdWishlist(orm.Model):
     _name = 'chd.wishlist'
     _columns = {
-        'owner': fields.many2one('res.partner',string="owner"),
-        'element': fields.one2many('chd.product_configurator.result','wishlist',string='elements'),
-    }
+        'owner': fields.many2one('res.partner', string="owner"),
+        'element': fields.one2many(
+            'chd.product_configurator.result',
+            'wishlist',
+            string='elements'),
+        }
+
 
 class chd_product_configurator_result(orm.Model):
     _inherit = 'chd.product_configurator.result'
     _columns = {
-        'wishlist':fields.many2one('chd.wishlist' ,string="Parent wishlist"),
+        'wishlist': fields.many2one('chd.wishlist', string="Parent wishlist"),
         'summary': fields.char(string='summary'),
-        'favorites':fields.boolean(string='favorites'),
+        'favorites': fields.boolean(string='favorites'),
     }
-
-
-
-
-
-
